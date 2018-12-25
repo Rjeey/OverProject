@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.TimePeriod;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -17,21 +20,31 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-12-11T18:16:30.627+03:00")
 
+@Entity
+@Table(name = "relatedPartyRef")
 public class RelatedPartyRef   {
   @JsonProperty("href")
+  @Column
   private String href = null;
 
   @JsonProperty("id")
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id = null;
 
   @JsonProperty("name")
+  @Column
   private String name = null;
 
   @JsonProperty("role")
+  @Column
   private String role = null;
 
   @JsonProperty("validFor")
-  private TimePeriod validFor = null;
+//  @OneToOne
+  @Transient
+   private TimePeriod validFor = null;
 
   public RelatedPartyRef href(String href) {
     this.href = href;

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -16,11 +18,16 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-12-11T18:16:30.627+03:00")
 
+//@Entity
+@Table(name = "characteristic")
+//TODO: sort out with id
 public class Characteristic   {
   @JsonProperty("name")
+  @Column
   private String name = null;
 
   @JsonProperty("value")
+  @Column
   private String value = null;
 
   public Characteristic name(String name) {

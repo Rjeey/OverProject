@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -16,35 +19,46 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-12-11T18:16:30.627+03:00")
 
+//@Entity
 public class MediumCharacteristic   {
   @JsonProperty("city")
+  @Column
   private String city = null;
 
   @JsonProperty("country")
+  @Column
   private String country = null;
 
   @JsonProperty("emailAddress")
+  @Column
   private String emailAddress = null;
 
   @JsonProperty("faxNumber")
+  @Column
   private String faxNumber = null;
 
   @JsonProperty("phoneNumber")
+  @Column
   private String phoneNumber = null;
 
   @JsonProperty("postCode")
+  @Column
   private String postCode = null;
 
   @JsonProperty("stateOrProvince")
+  @Column
   private String stateOrProvince = null;
 
   @JsonProperty("street1")
+  @Column
   private String street1 = null;
 
   @JsonProperty("street2")
+  @Column
   private String street2 = null;
 
   @JsonProperty("type")
+  @Column
   private String type = null;
 
   public MediumCharacteristic city(String city) {
