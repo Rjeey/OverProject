@@ -93,11 +93,11 @@ public class Customer {
 
     @JsonProperty("contactMedium")
     @Valid
-  @OneToMany(
-          cascade = CascadeType.ALL,
-          orphanRemoval = true
-  )
-//    @Transient
+//   @OneToMany(
+//           cascade = CascadeType.ALL,
+//           orphanRemoval = true
+//   )
+    @Transient
     private List<ContactMedium> contactMedium = null;
 
     @JsonProperty("characteristic")
