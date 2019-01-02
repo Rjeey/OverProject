@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean name="address" class="by.pvt.bena.AddressImpl"/>
+
+    <bean name="person" class="by.pvt.bena.PersonImpl">
+        <property name="address" ref="address"/>
+        <property name="name" value="My"/>
+        <property name="secondName" value="My to"/>
+    </bean>
+
+    <bean name="notifier" class="by.pvt.bena.PersonNotifier"/>
+    <aop:config>
+        <aop:aspect ref="notifier">
+            <aop:pointcut id="personPointcut" expression="execution(* *.getName(..))"/>
+            <aop:before method="before" pointcut-ref="personPointcut"/>
+            <aop:after method="after" pointcut-ref="personPointcut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
