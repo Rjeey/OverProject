@@ -1,6 +1,7 @@
 package io.swagger.service;
 
 import io.swagger.dao.CustomerDaoImpl;
+import io.swagger.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,9 +33,12 @@ public class CustomerServiceImpl <T> extends BaseServiceImpl {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void delete(T item){
-        customerDao.delete(item);
+    public void delete(String  id){
+        log.info("CustomerDaoImpl" + customerDao);
+        customerDao.delete(id);
     }
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Customer findById(String  id){ return customerDao.findById(id);}
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, value = "txManager")
     public void create(List<T> item){
