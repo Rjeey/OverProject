@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+//import javax.validation.constraints.;
 
 /**
  * Indicates the contact medium that could be used to contact the party.
@@ -21,8 +21,6 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-12-11T18:16:30.627+03:00")
 
 @Entity
-@Table(name = "contactMedium")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class ContactMedium  extends BasePojo  {
   @JsonProperty("preferred")
   @Column
@@ -37,7 +35,7 @@ public class ContactMedium  extends BasePojo  {
   private TimePeriod validFor = null;
 
   @JsonProperty("characteristic")
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   private MediumCharacteristic characteristic = null;
 
   public ContactMedium preferred(Boolean preferred) {

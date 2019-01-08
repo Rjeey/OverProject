@@ -1,12 +1,17 @@
 package io.swagger.api;
 
+import ch.qos.logback.core.joran.util.beans.BeanUtil;
+import io.swagger.model.Customer;
 import io.swagger.model.Error;
 import io.swagger.model.EventSubscription;
 import io.swagger.model.EventSubscriptionInput;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
+import io.swagger.service.EventSubscriptionServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,6 +34,9 @@ public class HubApiController implements HubApi {
 
     private static final Logger log = LoggerFactory.getLogger(HubApiController.class);
 
+    @Autowired
+    private EventSubscriptionServiceImpl eventSubcriptionService;
+
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
@@ -43,8 +51,12 @@ public class HubApiController implements HubApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<EventSubscription>(objectMapper.readValue("{  \"query\" : \"query\",  \"callback\" : \"callback\",  \"id\" : \"id\"}", EventSubscription.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
+                EventSubscription event = new EventSubscription();
+                BeanUtils.copyProperties(data, event);
+                eventSubcriptionService.save(event);
+                return new ResponseEntity<EventSubscription>(event,HttpStatus.OK);
+//                return new ResponseEntity<EventSubscription>(objectMapper.readValue("{  \"query\" : \"query\",  \"callback\" : \"callback\",  \"id\" : \"id\"}", EventSubscription.class), HttpStatus.NOT_IMPLEMENTED);
+            } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<EventSubscription>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -55,7 +67,9 @@ public class HubApiController implements HubApi {
 
     public ResponseEntity<Void> unregisterListener(@ApiParam(value = "The id of the registered listener",required=true) @PathVariable("id") String id) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+
+        eventSubcriptionService.delete(id);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 }

@@ -12,24 +12,25 @@ import java.util.logging.Logger;
 
 @Service
 @Transactional
-public class CustomerServiceImpl <T> extends BaseServiceImpl {
+public class CustomerServiceImpl  extends BaseServiceImpl {
 
     private static Logger log = Logger.getLogger(BaseServiceImpl.class.getName());
 
     @Autowired
-    private CustomerDaoImpl<T> customerDao;
+    private CustomerDaoImpl<Customer>  customerDao;
+
 
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public List<T> list() {
+    public List<Customer> list() {
         log.info("CustomerDaoImpl" + customerDao);
-        return customerDao.find();
+        return customerDao.getAll();
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void save(T item){
-        customerDao.save(item);
+    public void save(Customer customer){
+        customerDao.save(customer);
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -37,13 +38,16 @@ public class CustomerServiceImpl <T> extends BaseServiceImpl {
         log.info("CustomerDaoImpl" + customerDao);
         customerDao.delete(id);
     }
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Customer findById(String  id){ return customerDao.findById(id);}
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
+    public Customer retrieve(String  id){ return customerDao.get(id);}
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, value = "txManager")
-    public void create(List<T> item){
-        for (T t : item){
-            customerDao.save(t);
-        }
+    public void create(Customer customer){
+
+            customerDao.save(customer);
+    }
+
+    public void update(String id){
+        customerDao.update(id);
     }
 }

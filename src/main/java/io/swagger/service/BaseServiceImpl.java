@@ -13,8 +13,5 @@ public abstract class  BaseServiceImpl <T>{
 
    private static Logger log = Logger.getLogger(BaseServiceImpl.class.getName());
 
-    public abstract List<T> list();{
-
-
-    }
+    public abstract List<T> list();
 }

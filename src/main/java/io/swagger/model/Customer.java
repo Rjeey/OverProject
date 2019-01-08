@@ -67,37 +67,28 @@ public class Customer {
     private TimePeriod validFor = null;
 
     @JsonProperty("engagedParty")
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     private PartyRef engagedParty = null;
 
     @JsonProperty("type")
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     private RoleTypeRef type = null;
 
     @JsonProperty("account")
     @Valid
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<AccountRef> account = null;
 
     @JsonProperty("paymentMethod")
     @Valid
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PaymentMethodRef> paymentMethod = null;
 
     @JsonProperty("contactMedium")
     @Valid
-  @OneToMany(
-          cascade = CascadeType.ALL,
-          orphanRemoval = true
-  )
+    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ContactMedium> contactMedium = null;
 
@@ -108,28 +99,19 @@ public class Customer {
 
     @JsonProperty("creditProfile")
     @Valid
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<CreditProfile> creditProfile = null;
 
     @JsonProperty("agreement")
     @Valid
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<AgreementRef> agreement = null;
 
     @JsonProperty("relatedParty")
     @Valid
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<RelatedPartyRef> relatedParty = null;
 

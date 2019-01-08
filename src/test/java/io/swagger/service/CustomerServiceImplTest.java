@@ -21,9 +21,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = {HibernateXMLConfTest.class}, loader = AnnotationConfigContextLoader.class)
-//@Transactional
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {HibernateXMLConfTest.class}, loader = AnnotationConfigContextLoader.class)
+@Transactional
 public class CustomerServiceImplTest {
 
     @MockBean
@@ -33,13 +33,14 @@ public class CustomerServiceImplTest {
     HttpServletRequest httpServletRequest;
 
     @Resource
-    CustomerServiceImpl<Customer> objForTest;
+    CustomerServiceImpl objForTest;
 
     public Customer customer(String prefix) {
 
         Customer customer = new Customer();
-
-
+        customer.setName("Name: " + prefix);
+        customer.setStatus("Status: " + prefix);
+        customer.setStatusReason("StatusReason: " + prefix);
         return customer;
     }
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.xml.bind.annotation.XmlValue;
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -18,11 +19,19 @@ public abstract class BaseDaoImpl <T> {
     @Autowired
     SessionFactory sessionFactory;
 
-   public abstract List<T> find();
+   public abstract List<T> getAll();
 
-    public boolean add(List<T> iteam){
-       return false;
-    }
+     abstract T get(Serializable id);
+
+     public void save(T item){
+         openSession().saveOrUpdate(item);
+     }
+     public void update(T item){
+         openSession().update(item);
+     }
+     public void delete(T item){
+         openSession().delete(item);
+     }
 
 
     Session openSession(){
