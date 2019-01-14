@@ -1,35 +1,17 @@
 package io.swagger.model;
 
-import java.math.BigDecimal;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.AccountRef;
-import io.swagger.model.AgreementRef;
-import io.swagger.model.Characteristic;
-import io.swagger.model.ContactMedium;
-import io.swagger.model.CreditProfile;
-import io.swagger.model.PartyRef;
-import io.swagger.model.PaymentMethodRef;
-import io.swagger.model.RelatedPartyRef;
-import io.swagger.model.RoleTypeRef;
-import io.swagger.model.TimePeriod;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Type;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Customer
@@ -46,8 +28,8 @@ public class Customer {
 
     @JsonProperty("id")
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id = null;
 
     @JsonProperty("name")
@@ -67,22 +49,22 @@ public class Customer {
     private TimePeriod validFor = null;
 
     @JsonProperty("engagedParty")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PartyRef engagedParty = null;
 
     @JsonProperty("type")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private RoleTypeRef type = null;
 
     @JsonProperty("account")
     @Valid
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<AccountRef> account = null;
 
     @JsonProperty("paymentMethod")
     @Valid
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PaymentMethodRef> paymentMethod = null;
 
@@ -105,13 +87,13 @@ public class Customer {
 
     @JsonProperty("agreement")
     @Valid
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<AgreementRef> agreement = null;
 
     @JsonProperty("relatedParty")
     @Valid
-    @OneToMany
+    @OneToMany(cascade =  CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<RelatedPartyRef> relatedParty = null;
 

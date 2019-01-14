@@ -32,8 +32,8 @@ public class PartyRef   {
 
   @JsonProperty("id")
   @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
   private String id = null;
 
   @JsonProperty("name")

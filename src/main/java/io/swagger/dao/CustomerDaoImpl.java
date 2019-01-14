@@ -1,26 +1,20 @@
 package io.swagger.dao;
 
-import io.swagger.model.*;
-import io.swagger.service.BaseServiceImpl;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
+import io.swagger.model.Customer;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.OneToOne;
-import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Repository
-public class CustomerDaoImpl<Customer> extends BaseDaoImpl {
+public class CustomerDaoImpl extends BaseDaoImpl {
 
-    Class<Customer> tClass;
+    private static Logger log = Logger.getLogger(CustomerDaoImpl.class.getName());
 
-    private static Logger log = Logger.getLogger(BaseServiceImpl.class.getName());
+    private Class<Customer> tClass = Customer.class;
 
     @Autowired
     public CustomerDaoImpl(SessionFactory sessionFactory) {
@@ -37,17 +31,10 @@ public class CustomerDaoImpl<Customer> extends BaseDaoImpl {
     @SuppressWarnings("unchecked")
     @Override
     public Customer get(Serializable id) {
-        log.info("Call find()");
         return openSession().find(tClass,id);
 
     }
 
-
-
-//    public void delete(String id){
-//        log.info("Call delete()");
-//        Customer customer = openSession().get(tClass,id);
-//        openSession().delete(customer);
 
 }
 

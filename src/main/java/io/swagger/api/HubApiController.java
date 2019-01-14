@@ -1,12 +1,9 @@
 package io.swagger.api;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
-import io.swagger.model.Customer;
-import io.swagger.model.Error;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiParam;
 import io.swagger.model.EventSubscription;
 import io.swagger.model.EventSubscriptionInput;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.*;
 import io.swagger.service.EventSubscriptionServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,16 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.*;
-import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.List;
+import javax.validation.Valid;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-12-11T18:16:30.627+03:00")
 
 @Controller
@@ -55,7 +45,6 @@ public class HubApiController implements HubApi {
                 BeanUtils.copyProperties(data, event);
                 eventSubcriptionService.save(event);
                 return new ResponseEntity<EventSubscription>(event,HttpStatus.OK);
-//                return new ResponseEntity<EventSubscription>(objectMapper.readValue("{  \"query\" : \"query\",  \"callback\" : \"callback\",  \"id\" : \"id\"}", EventSubscription.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<EventSubscription>(HttpStatus.INTERNAL_SERVER_ERROR);

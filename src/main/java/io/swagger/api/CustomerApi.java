@@ -37,7 +37,7 @@ public interface CustomerApi {
         @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     @RequestMapping(value = "/customer",
         produces = { "application/json" }, 
-        consumes = { "application/json" },
+       // consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<Customer> createCustomer(@ApiParam(value = "The Customer to be created" ,required=true )  @Valid @RequestBody CustomerCreate customer);
 
@@ -50,7 +50,7 @@ public interface CustomerApi {
         @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     @RequestMapping(value = "/customer/{id}",
         produces = { "application/json" }, 
-        consumes = { "application/json" },
+       // consumes = { "application/json" },
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteCustomer(@ApiParam(value = "Identifier of the Customer",required=true) @PathVariable("id") String id);
 
@@ -75,7 +75,7 @@ public interface CustomerApi {
         @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     @RequestMapping(value = "/customer/{id}",
         produces = { "application/json" }, 
-        consumes = { "application/json" },
+       // consumes = { "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<List<Customer>> retrieveCustomer(@ApiParam(value = "Identifier of the Customer",required=true) @PathVariable("id") String id);
 
@@ -88,7 +88,7 @@ public interface CustomerApi {
         @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     @RequestMapping(value = "/customer/{id}",
         produces = { "application/json" }, 
-        consumes = { "application/json" },
+       // consumes = { "application/json" },
         method = RequestMethod.PATCH)
     ResponseEntity<Customer> updateCustomer(@ApiParam(value = "Identifier of the Customer",required=true) @PathVariable("id") String id,@ApiParam(value = "The Customer to be updated" ,required=true )  @Valid @RequestBody CustomerUpdate customer);
 

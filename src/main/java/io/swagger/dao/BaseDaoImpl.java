@@ -1,7 +1,5 @@
 package io.swagger.dao;
 
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -24,12 +22,15 @@ public abstract class BaseDaoImpl <T> {
      abstract T get(Serializable id);
 
      public void save(T item){
+
          openSession().saveOrUpdate(item);
      }
      public void update(T item){
+
          openSession().update(item);
      }
      public void delete(T item){
+
          openSession().delete(item);
      }
 

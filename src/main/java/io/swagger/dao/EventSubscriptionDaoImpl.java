@@ -1,10 +1,8 @@
 package io.swagger.dao;
 
-import io.swagger.model.Customer;
 import io.swagger.model.EventSubscription;
 import io.swagger.service.BaseServiceImpl;
 import org.hibernate.SessionFactory;
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,17 +11,22 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Repository
-public class EventSubscriptionDaoImpl <EventSubscription> extends BaseDaoImpl  {
+public class EventSubscriptionDaoImpl  extends BaseDaoImpl  {
 
     private static Logger log = Logger.getLogger(BaseServiceImpl.class.getName());
 
-    Class<EventSubscription> tClass;
+   private  Class<EventSubscription> tClass = EventSubscription.class;
+
+   @Autowired
+    public EventSubscriptionDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @SuppressWarnings("unchecked")
     @Override
     public List<EventSubscription> getAll() {
         log.info("Call getAll()");
-        return openSession().createQuery("from PartyAccount").list();
+        return openSession().createQuery("from Customer").list();
     }
 
 
@@ -34,9 +37,4 @@ public class EventSubscriptionDaoImpl <EventSubscription> extends BaseDaoImpl  {
 
     }
 
-
-    public void deleteEvent(String  id) {
-        EventSubscription eventSubscription = openSession().byId(tClass).load(id);
-        openSession().delete(eventSubscription);
-    }
 }
